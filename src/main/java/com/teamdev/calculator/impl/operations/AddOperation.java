@@ -1,4 +1,4 @@
-package com.teamdev.calculator.impl.binary_operations;
+package com.teamdev.calculator.impl.operations;
 
 import com.teamdev.calculator.impl.EvaluationStack;
 import com.teamdev.calculator.impl.Operation;

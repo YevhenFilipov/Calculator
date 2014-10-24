@@ -4,8 +4,8 @@ import com.teamdev.calculator.impl.EvaluationCommand;
 import com.teamdev.calculator.impl.EvaluationContext;
 import com.teamdev.calculator.impl.EvaluationStack;
 import com.teamdev.calculator.impl.MathExpressionParser;
-import com.teamdev.calculator.impl.binary_operations.AddOperation;
-import com.teamdev.calculator.impl.binary_operations.SubtractionOperation;
+import com.teamdev.calculator.impl.operations.AddOperation;
+import com.teamdev.calculator.impl.operations.SubtractionOperation;
 
 public class OperationParser implements MathExpressionParser {
     @Override
