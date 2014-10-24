@@ -14,7 +14,8 @@ public class EvaluationMatrix implements TransitionMatrix<State> {
 
     private final Map<State, Set<State>> transitions = new HashMap<State, Set<State>>() {{
         put(START, of(NUMBER));
-        put(NUMBER, of(FINISH));
+        put(NUMBER, of(FINISH, BINARY_OPERATION));
+        put(BINARY_OPERATION, of(NUMBER));
         put(FINISH, noneOf(State.class));
     }};
 

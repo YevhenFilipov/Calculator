@@ -2,18 +2,19 @@ package com.teamdev.calculator.impl;
 
 import com.teamdev.calculator.impl.parser.EndOfExpressionParser;
 import com.teamdev.calculator.impl.parser.NumberParser;
+import com.teamdev.calculator.impl.parser.OperationParser;
 import com.teamdev.fsm.StateAcceptor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.teamdev.calculator.impl.State.FINISH;
-import static com.teamdev.calculator.impl.State.NUMBER;
+import static com.teamdev.calculator.impl.State.*;
 
 public class EvaluationService implements StateAcceptor<State, EvaluationContext> {
 
     private final Map<State, MathExpressionParser> parsers = new HashMap<State, MathExpressionParser>() {{
         put(NUMBER, new NumberParser());
+        put(BINARY_OPERATION, new OperationParser());
         put(FINISH, new EndOfExpressionParser());
     }};
 

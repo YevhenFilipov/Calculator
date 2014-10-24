@@ -20,12 +20,17 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
 
     @Override
     protected Double finish(EvaluationContext context) {
+        while (!context.getEvaluationStack().getOperationStack().isEmpty()) {
+
+            Operation currentOperation = context.getEvaluationStack().getOperationStack().removeLast();
+            currentOperation.execute(context.getEvaluationStack());
+        }
         return context.getEvaluationStack().getOperandStack().pop();
     }
 
     public static void main(String[] args) throws Exception {
         final StateMachineCalculator calculator = new StateMachineCalculator();
-        final double result = calculator.evaluate("509.42");
+        final double result = calculator.evaluate("1");
         System.out.println("result = " + result);
     }
 }
