@@ -31,7 +31,7 @@ public class StateMachineCalculatorTest {
 
     @Test
 
-    public void verifyAddSubtractOperations() throws Exception{
+    public void verifyAddSubtractOperations() throws Exception {
 
         final String inputString = "0-1+1-1+1+10";
         final Double referenceResult = 10.0;
@@ -43,7 +43,7 @@ public class StateMachineCalculatorTest {
 
     @Test
 
-    public void verifyBrackets() throws Exception{
+    public void verifyBrackets() throws Exception {
 
         final String inputString = "1+1-(4-(2+3)-3)+5";
         final Double referenceResult = 11.0;
@@ -56,7 +56,7 @@ public class StateMachineCalculatorTest {
 
     @Test(expected = EvaluationException.class)
 
-    public void discrepancyTransitionMatrix() throws Exception{
+    public void discrepancyTransitionMatrix() throws Exception {
 
         final String inputString = "2+2+";
 

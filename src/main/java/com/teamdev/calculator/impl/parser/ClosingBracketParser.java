@@ -5,24 +5,26 @@ import com.teamdev.calculator.impl.*;
 
 public class ClosingBracketParser implements MathExpressionParser {
     @Override
-    public EvaluationCommand parse(EvaluationContext context) throws EvaluationException{
+    public EvaluationCommand parse(EvaluationContext context) throws EvaluationException {
         if (context.getMathExpression().length() == context.getExpressionParsingIndex())
             return null;
         char currentEvaluatingChar = context.getMathExpression().charAt(context.getExpressionParsingIndex());
 
         switch (currentEvaluatingChar) {
 
-            case ')':{
-                if(context.getEvaluationStack().getOperandStack().size() < 2)
-                    throw new EvaluationException("Opening bracket is missing for bracket at position: "
+            case ')': {
+                if (context.getEvaluationStack().getOperandStack().size() < 2)
+                    throw new EvaluationException("Error during evaluating: "
+                            + context.getMathExpression().charAt(context.getExpressionParsingIndex())
+                            + ". Opening bracket is missing for bracket at position: "
                             + context.getExpressionParsingIndex(),
                             context.getExpressionParsingIndex());
                 context.setExpressionParsingIndex(context.getExpressionParsingIndex() + 1);
                 return new EvaluationCommand() {
                     @Override
-                    public void evaluate(EvaluationStack stack){
+                    public void evaluate(EvaluationStack stack) {
 
-                        while (!stack.getOperationStack().peek().isEmpty()){
+                        while (!stack.getOperationStack().peek().isEmpty()) {
                             Operation currentOperation = stack.getOperationStack().peek().removeLast();
                             currentOperation.execute(stack);
                         }

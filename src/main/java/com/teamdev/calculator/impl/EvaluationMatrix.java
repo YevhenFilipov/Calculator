@@ -17,7 +17,7 @@ public class EvaluationMatrix implements TransitionMatrix<State> {
         put(NUMBER, of(FINISH, BINARY_OPERATION, CLOSING_BRACKET));
         put(BINARY_OPERATION, of(NUMBER, OPENING_BRACKET));
         put(OPENING_BRACKET, of(OPENING_BRACKET, NUMBER));
-        put(CLOSING_BRACKET , of(CLOSING_BRACKET, BINARY_OPERATION, FINISH));
+        put(CLOSING_BRACKET, of(CLOSING_BRACKET, BINARY_OPERATION, FINISH));
         put(FINISH, noneOf(State.class));
     }};
 

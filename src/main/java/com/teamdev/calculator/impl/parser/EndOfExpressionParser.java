@@ -14,7 +14,9 @@ public class EndOfExpressionParser implements MathExpressionParser {
             return null;
         }
         if (context.getEvaluationStack().getOperandStack().size() > 1)
-            throw new EvaluationException("Closing bracket is missing for bracket at position: "
+            throw new EvaluationException("Error during evaluating: "
+                    + context.getMathExpression().charAt(context.getLastOpeningBricketIndex())
+                    + ". Closing bracket is missing for bracket at position: "
                     + context.getLastOpeningBricketIndex(),
                     context.getLastOpeningBricketIndex());
 

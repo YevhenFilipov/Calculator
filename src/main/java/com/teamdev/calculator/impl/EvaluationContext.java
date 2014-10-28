@@ -8,7 +8,6 @@ public class EvaluationContext implements StateMachineContext<State, EvaluationC
 
     private final EvaluationMatrix matrix = new EvaluationMatrix();
     private final EvaluationService evaluationService = new EvaluationService();
-
     private final EvaluationStack evaluationStack = new EvaluationStack();
 
     private final String mathExpression;

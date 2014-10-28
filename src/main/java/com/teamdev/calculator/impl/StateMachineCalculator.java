@@ -14,8 +14,11 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
 
     @Override
     protected void deadlock(EvaluationContext context, State currentState) throws EvaluationException {
-        throw new EvaluationException("Deadlock in state " + currentState + " at position " +
-                context.getExpressionParsingIndex(), context.getExpressionParsingIndex());
+        throw new EvaluationException("Error after evaluating: "
+                + context.getMathExpression().charAt(context.getExpressionParsingIndex() - 1)
+                + ". Deadlock in state " + currentState + " at position "
+                + context.getExpressionParsingIndex(),
+                context.getExpressionParsingIndex() - 1);
     }
 
     @Override

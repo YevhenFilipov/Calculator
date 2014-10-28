@@ -4,14 +4,14 @@ import com.teamdev.calculator.impl.*;
 
 import java.util.ArrayDeque;
 
-public class OpeningBracketParser implements MathExpressionParser{
+public class OpeningBracketParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
         if (context.getMathExpression().length() == context.getExpressionParsingIndex())
             return null;
         char currentEvaluatingChar = context.getMathExpression().charAt(context.getExpressionParsingIndex());
         switch (currentEvaluatingChar) {
-            case '(':{
+            case '(': {
                 context.setLastOpeningBricketIndex(context.getExpressionParsingIndex());
                 context.setExpressionParsingIndex(context.getExpressionParsingIndex() + 1);
                 return new EvaluationCommand() {
