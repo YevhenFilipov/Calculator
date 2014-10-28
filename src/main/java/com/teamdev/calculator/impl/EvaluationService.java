@@ -1,8 +1,7 @@
 package com.teamdev.calculator.impl;
 
-import com.teamdev.calculator.impl.parser.EndOfExpressionParser;
-import com.teamdev.calculator.impl.parser.NumberParser;
-import com.teamdev.calculator.impl.parser.OperationParser;
+import com.teamdev.calculator.EvaluationException;
+import com.teamdev.calculator.impl.parser.*;
 import com.teamdev.fsm.StateAcceptor;
 
 import java.util.HashMap;
@@ -16,11 +15,13 @@ public class EvaluationService implements StateAcceptor<State, EvaluationContext
         put(NUMBER, new NumberParser());
         put(BINARY_OPERATION, new OperationParser());
         put(FINISH, new EndOfExpressionParser());
+        put(OPENING_BRACKET, new OpeningBracketParser());
+        put(CLOSING_BRACKET, new ClosingBracketParser());
     }};
 
 
     @Override
-    public boolean acceptState(EvaluationContext context, State possibleState) {
+    public boolean acceptState(EvaluationContext context, State possibleState) throws EvaluationException {
 
         final MathExpressionParser parser = parsers.get(possibleState);
 

@@ -13,6 +13,15 @@ public class EvaluationContext implements StateMachineContext<State, EvaluationC
 
     private final String mathExpression;
     private int expressionParsingIndex = 0;
+    private int lastOpeningBracketIndex = 0;
+
+    public int getLastOpeningBricketIndex() {
+        return lastOpeningBracketIndex;
+    }
+
+    public void setLastOpeningBricketIndex(int lastOpeningBricketIndex) {
+        this.lastOpeningBracketIndex = lastOpeningBricketIndex;
+    }
 
     public EvaluationContext(String mathExpression) {
         this.mathExpression = mathExpression;

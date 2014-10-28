@@ -1,18 +1,25 @@
 package com.teamdev.calculator.impl;
 
+import com.teamdev.calculator.EvaluationException;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class EvaluationStack {
 
-    private final Deque<Double> operandStack = new ArrayDeque<Double>();
-    private final Deque<Operation> OperationStack = new ArrayDeque<Operation>();
+    private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
+    private final Deque<Deque<Operation>> operationStack = new ArrayDeque<Deque<Operation>>();
 
-    public Deque<Operation> getOperationStack() {
-        return OperationStack;
+    public EvaluationStack(){
+        operandStack.push(new ArrayDeque<Double>());
+        operationStack.push(new ArrayDeque<Operation>());
     }
 
-    public Deque<Double> getOperandStack() {
+    public Deque<Deque<Operation>> getOperationStack() {
+        return operationStack;
+    }
+
+    public Deque<Deque<Double>> getOperandStack() {
         return operandStack;
     }
 }

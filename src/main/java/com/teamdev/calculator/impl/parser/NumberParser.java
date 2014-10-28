@@ -31,7 +31,7 @@ public class NumberParser implements MathExpressionParser {
         return new EvaluationCommand() {
             @Override
             public void evaluate(EvaluationStack stack) {
-                stack.getOperandStack().push(number.doubleValue());
+                stack.getOperandStack().peek().push(number.doubleValue());
             }
         };
     }

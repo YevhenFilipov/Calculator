@@ -19,7 +19,7 @@ public class OperationParser implements MathExpressionParser {
                 return new EvaluationCommand() {
                     @Override
                     public void evaluate(EvaluationStack stack) {
-                        stack.getOperationStack().push(new AddOperation());
+                        stack.getOperationStack().peek().push(new AddOperation());
                     }
                 };
             }
@@ -29,7 +29,7 @@ public class OperationParser implements MathExpressionParser {
                 return new EvaluationCommand() {
                     @Override
                     public void evaluate(EvaluationStack stack) {
-                        stack.getOperationStack().push(new SubtractionOperation());
+                        stack.getOperationStack().peek().push(new SubtractionOperation());
                     }
                 };
             }
