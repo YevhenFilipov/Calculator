@@ -23,11 +23,7 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
 
     @Override
     protected Double finish(EvaluationContext context) {
-        while (!context.getEvaluationStack().getOperationStack().peek().isEmpty()) {
 
-            Operation currentOperation = context.getEvaluationStack().getOperationStack().peek().removeLast();
-            currentOperation.execute(context.getEvaluationStack());
-        }
         return context.getEvaluationStack().getOperandStack().pop().pop();
     }
 

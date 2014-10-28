@@ -1,10 +1,7 @@
 package com.teamdev.calculator.impl.parser;
 
 import com.teamdev.calculator.EvaluationException;
-import com.teamdev.calculator.impl.EvaluationCommand;
-import com.teamdev.calculator.impl.EvaluationContext;
-import com.teamdev.calculator.impl.EvaluationStack;
-import com.teamdev.calculator.impl.MathExpressionParser;
+import com.teamdev.calculator.impl.*;
 
 public class EndOfExpressionParser implements MathExpressionParser {
 
@@ -23,6 +20,10 @@ public class EndOfExpressionParser implements MathExpressionParser {
         return new EvaluationCommand() {
             @Override
             public void evaluate(EvaluationStack stack) {
+                while (!stack.getOperationStack().peek().isEmpty()) {
+                    Operation currentOperation = stack.getOperationStack().peek().removeLast();
+                    currentOperation.execute(stack);
+                }
             }
         };
     }
