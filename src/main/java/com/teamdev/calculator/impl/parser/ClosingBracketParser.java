@@ -5,39 +5,31 @@ import com.teamdev.calculator.impl.*;
 
 public class ClosingBracketParser implements MathExpressionParser {
     @Override
-    public EvaluationCommand parse(EvaluationContext context) throws EvaluationException {
-        if (context.getMathExpression().length() == context.getExpressionParsingIndex())
+    public EvaluationCommand parse(EvaluationContext context) {
+
+        final MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
+
+        if (mathExpressionReader.isEndOfMathExpression())
             return null;
-        char currentEvaluatingChar = context.getMathExpression().charAt(context.getExpressionParsingIndex());
 
-        switch (currentEvaluatingChar) {
+        final String symbolPresentation = MathExpressionSymbols.CLOSING_BRACKET.getSymbolPresentation();
+        if (mathExpressionReader.getRemainingMathExpression().startsWith(symbolPresentation)) {
+            mathExpressionReader.incrementMathExpressionIndex(symbolPresentation.length());
+            return new EvaluationCommand() {
+                @Override
+                public void evaluate(EvaluationStack stack) throws EvaluationException {
 
-            case ')': {
-                if (context.getEvaluationStack().getOperandStack().size() < 2)
-                    throw new EvaluationException("Error during evaluating: "
-                            + context.getMathExpression().charAt(context.getExpressionParsingIndex())
-                            + ". Opening bracket is missing for bracket at position: "
-                            + context.getExpressionParsingIndex(),
-                            context.getExpressionParsingIndex());
-                context.setExpressionParsingIndex(context.getExpressionParsingIndex() + 1);
-                return new EvaluationCommand() {
-                    @Override
-                    public void evaluate(EvaluationStack stack) {
+                    if (!stack.isOperationStackHaveBrackets()) throw new EvaluationException(
+                            "Error during evaluating: "
+                                    + symbolPresentation
+                                    + ". Opening bracket is missing for bracket at position: "
+                                    + mathExpressionReader.getIndex(),
+                            mathExpressionReader.getIndex());
 
-                        while (!stack.getOperationStack().peek().isEmpty()) {
-                            Operation currentOperation = stack.getOperationStack().peek().removeLast();
-                            currentOperation.execute(stack);
-                        }
-                        Double result = stack.getOperandStack().peek().pop();
-                        stack.getOperationStack().pop();
-                        stack.getOperandStack().pop();
-                        stack.getOperandStack().peek().push(result);
-
-                    }
-                };
-            }
+                    stack.pushClosingBracket();
+                }
+            };
         }
-
         return null;
     }
 }

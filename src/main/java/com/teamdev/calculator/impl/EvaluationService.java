@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static com.teamdev.calculator.impl.State.*;
 
-public class EvaluationService implements StateAcceptor<State, EvaluationContext> {
+public class EvaluationService implements StateAcceptor<State, EvaluationContext, EvaluationException> {
 
     private final Map<State, MathExpressionParser> parsers = new HashMap<State, MathExpressionParser>() {{
         put(NUMBER, new NumberParser());
@@ -28,6 +28,8 @@ public class EvaluationService implements StateAcceptor<State, EvaluationContext
         if (parser == null) {
             throw new IllegalStateException("Parser not found for state: " + possibleState);
         }
+
+        context.getMathExpressionReader().skipWhiteSpaces();
 
         final EvaluationCommand evaluationCommand = parser.parse(context);
         if (evaluationCommand == null) {

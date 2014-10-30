@@ -4,32 +4,28 @@ import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.MathExpressionCalculator;
 import com.teamdev.fsm.FiniteStateMachine;
 
-public class StateMachineCalculator extends FiniteStateMachine<State, EvaluationContext, Double>
+public class StateMachineCalculator extends FiniteStateMachine<State, EvaluationContext, Double, EvaluationException>
         implements MathExpressionCalculator {
 
     @Override
-    public double evaluate(String mathExpression) throws Exception {
+    public double evaluate(String mathExpression) throws EvaluationException {
         return run(new EvaluationContext(mathExpression));
     }
 
     @Override
     protected void deadlock(EvaluationContext context, State currentState) throws EvaluationException {
-        throw new EvaluationException("Error after evaluating: "
-                + context.getMathExpression().charAt(context.getExpressionParsingIndex() - 1)
-                + ". Deadlock in state " + currentState + " at position "
-                + context.getExpressionParsingIndex(),
-                context.getExpressionParsingIndex() - 1);
+        throw new EvaluationException("Incorrect expression format.",
+                context.getMathExpressionReader().getIndex());
     }
 
     @Override
     protected Double finish(EvaluationContext context) {
-
-        return context.getEvaluationStack().getOperandStack().pop().pop();
+        return context.getEvaluationStack().popNumber();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws EvaluationException {
         final StateMachineCalculator calculator = new StateMachineCalculator();
-        final double result = calculator.evaluate("(1+2)+3");
+        final double result = calculator.evaluate("1+1-(4-(2+3)-3+5");
         System.out.println("result = " + result);
     }
 }

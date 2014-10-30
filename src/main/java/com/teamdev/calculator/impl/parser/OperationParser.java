@@ -1,41 +1,31 @@
 package com.teamdev.calculator.impl.parser;
 
-import com.teamdev.calculator.impl.EvaluationCommand;
-import com.teamdev.calculator.impl.EvaluationContext;
-import com.teamdev.calculator.impl.EvaluationStack;
-import com.teamdev.calculator.impl.MathExpressionParser;
-import com.teamdev.calculator.impl.operations.AddOperation;
-import com.teamdev.calculator.impl.operations.SubtractionOperation;
+import com.teamdev.calculator.impl.*;
+import com.teamdev.calculator.impl.operations.BinaryOperation;
 
 public class OperationParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
-        if (context.getMathExpression().length() == context.getExpressionParsingIndex()) return null;
-        char currentEvaluatingChar = context.getMathExpression().charAt(context.getExpressionParsingIndex());
-        switch (currentEvaluatingChar) {
 
-            case '+': {
-                context.setExpressionParsingIndex(context.getExpressionParsingIndex() + 1);
+        final MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
+
+        if (mathExpressionReader.isEndOfMathExpression()) return null;
+
+        final OperationFactory operationFactory = context.getOperationFactory();
+        final String remainingMathExpression = mathExpressionReader.getRemainingMathExpression();
+
+        for (String operationPresentation : operationFactory.getAvailableOperationPresentation()) {
+            if (remainingMathExpression.startsWith(operationPresentation)) {
+                mathExpressionReader.incrementMathExpressionIndex(operationPresentation.length());
+                final BinaryOperation newOperation = operationFactory.createOperation(operationPresentation);
                 return new EvaluationCommand() {
                     @Override
                     public void evaluate(EvaluationStack stack) {
-                        stack.getOperationStack().peek().push(new AddOperation());
+                        stack.pushOperation(newOperation);
                     }
                 };
             }
-
-            case '-': {
-                context.setExpressionParsingIndex(context.getExpressionParsingIndex() + 1);
-                return new EvaluationCommand() {
-                    @Override
-                    public void evaluate(EvaluationStack stack) {
-                        stack.getOperationStack().peek().push(new SubtractionOperation());
-                    }
-                };
-            }
-
-            default:
-                return null;
         }
+        return null;
     }
 }

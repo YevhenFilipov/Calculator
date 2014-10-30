@@ -1,45 +1,42 @@
 package com.teamdev.calculator.impl;
 
+import com.teamdev.calculator.EvaluationException;
 import com.teamdev.fsm.StateAcceptor;
 import com.teamdev.fsm.StateMachineContext;
 import com.teamdev.fsm.TransitionMatrix;
 
-public class EvaluationContext implements StateMachineContext<State, EvaluationContext> {
+public class EvaluationContext implements StateMachineContext<State, EvaluationContext, EvaluationException> {
+
+    private int lastOpeningBracketIndex = 0;
 
     private final EvaluationMatrix matrix = new EvaluationMatrix();
     private final EvaluationService evaluationService = new EvaluationService();
     private final EvaluationStack evaluationStack = new EvaluationStack();
+    private final OperationFactory operationFactory = new OperationFactory();
+    private final MathExpressionReader mathExpressionReader;
 
-    private final String mathExpression;
-    private int expressionParsingIndex = 0;
-    private int lastOpeningBracketIndex = 0;
+    public EvaluationContext(String mathExpression) {
+        mathExpressionReader = new MathExpressionReader(mathExpression);
+    }
 
-    public int getLastOpeningBricketIndex() {
+    public MathExpressionReader getMathExpressionReader() {
+        return mathExpressionReader;
+    }
+
+    public int getLastOpeningBracketIndex() {
         return lastOpeningBracketIndex;
     }
 
-    public void setLastOpeningBricketIndex(int lastOpeningBricketIndex) {
-        this.lastOpeningBracketIndex = lastOpeningBricketIndex;
-    }
-
-    public EvaluationContext(String mathExpression) {
-        this.mathExpression = mathExpression;
-    }
-
-    public String getMathExpression() {
-        return mathExpression;
-    }
-
-    public int getExpressionParsingIndex() {
-        return expressionParsingIndex;
-    }
-
-    public void setExpressionParsingIndex(int expressionParsingIndex) {
-        this.expressionParsingIndex = expressionParsingIndex;
+    public void setLastOpeningBracketIndex(int lastOpeningBracketIndex) {
+        this.lastOpeningBracketIndex = lastOpeningBracketIndex;
     }
 
     public EvaluationStack getEvaluationStack() {
         return evaluationStack;
+    }
+
+    public OperationFactory getOperationFactory() {
+        return operationFactory;
     }
 
     @Override
@@ -48,7 +45,7 @@ public class EvaluationContext implements StateMachineContext<State, EvaluationC
     }
 
     @Override
-    public StateAcceptor<State, EvaluationContext> getStateAcceptor() {
+    public StateAcceptor<State, EvaluationContext, EvaluationException> getStateAcceptor() {
         return evaluationService;
     }
 }

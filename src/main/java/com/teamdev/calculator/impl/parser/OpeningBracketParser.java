@@ -2,28 +2,26 @@ package com.teamdev.calculator.impl.parser;
 
 import com.teamdev.calculator.impl.*;
 
-import java.util.ArrayDeque;
-
 public class OpeningBracketParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
-        if (context.getMathExpression().length() == context.getExpressionParsingIndex())
-            return null;
-        char currentEvaluatingChar = context.getMathExpression().charAt(context.getExpressionParsingIndex());
-        switch (currentEvaluatingChar) {
-            case '(': {
-                context.setLastOpeningBricketIndex(context.getExpressionParsingIndex());
-                context.setExpressionParsingIndex(context.getExpressionParsingIndex() + 1);
-                return new EvaluationCommand() {
-                    @Override
-                    public void evaluate(EvaluationStack stack) {
-                        stack.getOperandStack().push(new ArrayDeque<Double>());
-                        stack.getOperationStack().push(new ArrayDeque<Operation>());
-                    }
-                };
-            }
-        }
 
+        MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
+
+        if (mathExpressionReader.isEndOfMathExpression())
+            return null;
+
+        final String symbolPresentation = MathExpressionSymbols.OPENING_BRACKET.getSymbolPresentation();
+        if (mathExpressionReader.getRemainingMathExpression().startsWith(symbolPresentation)) {
+            context.setLastOpeningBracketIndex(mathExpressionReader.getIndex());
+            mathExpressionReader.incrementMathExpressionIndex(symbolPresentation.length());
+            return new EvaluationCommand() {
+                @Override
+                public void evaluate(EvaluationStack stack) {
+                    stack.pushOpeningBracket();
+                }
+            };
+        }
         return null;
     }
 }

@@ -1,9 +1,6 @@
 package com.teamdev.calculator.impl.parser;
 
-import com.teamdev.calculator.impl.EvaluationCommand;
-import com.teamdev.calculator.impl.EvaluationContext;
-import com.teamdev.calculator.impl.EvaluationStack;
-import com.teamdev.calculator.impl.MathExpressionParser;
+import com.teamdev.calculator.impl.*;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -17,8 +14,9 @@ public class NumberParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 
-        final String mathExpression = context.getMathExpression();
-        final int index = context.getExpressionParsingIndex();
+        final MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
+        final String mathExpression = mathExpressionReader.getMathExpression();
+        final int index = mathExpressionReader.getIndex();
 
         final ParsePosition parsePosition = new ParsePosition(index);
         final Number number = numberFormat.parse(mathExpression, parsePosition);
@@ -26,12 +24,12 @@ public class NumberParser implements MathExpressionParser {
             return null;
         }
 
-        context.setExpressionParsingIndex(parsePosition.getIndex());
+        mathExpressionReader.setIndex(parsePosition.getIndex());
 
         return new EvaluationCommand() {
             @Override
             public void evaluate(EvaluationStack stack) {
-                stack.getOperandStack().peek().push(number.doubleValue());
+                stack.pushNumber(number.doubleValue());
             }
         };
     }
