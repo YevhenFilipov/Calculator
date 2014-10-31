@@ -1,15 +1,17 @@
 package com.teamdev.calculator.impl;
 
 import com.teamdev.calculator.impl.operations.BinaryOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class EvaluationStack {
 
+    private final Logger logger = LoggerFactory.getLogger(EvaluationStack.class);
     private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
     private final Deque<Deque<BinaryOperation>> operationStack = new ArrayDeque<Deque<BinaryOperation>>();
-    // private final Deque<Integer> operationStackSize = new ArrayDeque<Integer>();
 
     public EvaluationStack() {
         operandStack.push(new ArrayDeque<Double>());
@@ -25,10 +27,14 @@ public class EvaluationStack {
     }
 
     public void executeTopOperator() {
+
         final Double rightOperand = operandStack.peek().pop();
         final Double leftOperand = operandStack.peek().pop();
-        final Double result = operationStack.peek().pop().execute(leftOperand, rightOperand);
+        final BinaryOperation currentOperation = operationStack.peek().pop();
+
+        final Double result = currentOperation.execute(leftOperand, rightOperand);
         operandStack.peek().push(result);
+        logger.info("Current executing operation is: " + currentOperation.getClass().getSimpleName());
     }
 
     public void popAllOperations() {
