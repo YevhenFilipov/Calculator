@@ -68,8 +68,6 @@ public class MathExpressionCalculatortest {
             int result = e.getErrorIndex();
             Assert.assertTrue("Test error position for closed bracket", result == referenceResult);
         }
-
-
     }
 
 
