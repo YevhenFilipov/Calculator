@@ -30,9 +30,9 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
         return result;
     }
 
-    public static void main(String[] args) throws EvaluationException {
-        final StateMachineCalculator calculator = new StateMachineCalculator();
-        final double result = calculator.evaluate("1+1-(2+3)");
-        System.out.println("result = " + result);
-    }
+//    public static void main(String[] args) throws EvaluationException {
+//        final StateMachineCalculator calculator = new StateMachineCalculator();
+//        final double result = calculator.evaluate("1+1-(2+3)");
+//        System.out.println("result = " + result);
+//    }
 }
