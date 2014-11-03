@@ -15,7 +15,7 @@ public class MathExpressionCalculatorTest {
 
         final MathExpressionCalculator calculator = new StateMachineCalculator();
         final double result = calculator.evaluate(inputString);
-        Assert.assertTrue("Number inputted", result == referenceResult);
+        Assert.assertTrue("Single number test", result == referenceResult);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class MathExpressionCalculatorTest {
 
         final MathExpressionCalculator calculator = new StateMachineCalculator();
         final double result = calculator.evaluate(inputString);
-        Assert.assertTrue("AddOperation", result == referenceResult);
+        Assert.assertTrue("AddOperation test", result == referenceResult);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class MathExpressionCalculatorTest {
 
         final MathExpressionCalculator calculator = new StateMachineCalculator();
         final double result = calculator.evaluate(inputString);
-        Assert.assertTrue("AddSubtractOperations", result == referenceResult);
+        Assert.assertTrue("Add and subtract operations  test", result == referenceResult);
     }
 
     @Test
@@ -51,8 +51,84 @@ public class MathExpressionCalculatorTest {
 
         final MathExpressionCalculator calculator = new StateMachineCalculator();
         final double result = calculator.evaluate(inputString);
-        Assert.assertTrue("TestBrackets", result == referenceResult);
+        Assert.assertTrue("TestBrackets test", result == referenceResult);
     }
+
+    @Test
+
+    public void verifyMultiplyOperation() throws EvaluationException {
+
+        final String inputString = "2*2";
+        final Double referenceResult = 4.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        final double result = calculator.evaluate(inputString);
+        Assert.assertTrue("MultiplyOperation test", result == referenceResult);
+    }
+
+    @Test
+
+    public void verifyDivisionOperation() throws EvaluationException {
+
+        final String inputString = "6/2";
+        final Double referenceResult = 3.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        final double result = calculator.evaluate(inputString);
+        Assert.assertTrue("DivisionOperation test", result == referenceResult);
+    }
+
+    @Test
+
+    public void verifyPowerOperation() throws EvaluationException {
+
+        final String inputString = "2^3";
+        final Double referenceResult = 8.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        final double result = calculator.evaluate(inputString);
+        Assert.assertTrue("PowerOperation test", result == referenceResult);
+    }
+
+    @Test
+
+    public void verifyAllBinaryOperations() throws EvaluationException {
+
+        final String inputString = "2+3*2^3/2";
+        final Double referenceResult = 14.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        final double result = calculator.evaluate(inputString);
+        Assert.assertTrue("Test for all binary operations test", result == referenceResult);
+    }
+
+    @Test
+
+    public void verifyAllBinaryOperationsWithBrackets() throws EvaluationException {
+
+        final String inputString = "25-((2+3*2^3/2)+6)";
+        final Double referenceResult = 5.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        final double result = calculator.evaluate(inputString);
+        Assert.assertTrue("Test for all binary operations with brackets test", result == referenceResult);
+    }
+
+    @Test
+    public void verifyErrorDivisionByZero() {
+
+        final String inputString = "1/0";
+        final String referenceResult = "Division by zero!";
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        try {
+            calculator.evaluate(inputString);
+        } catch (EvaluationException e) {
+            String result = e.getMessage();
+            Assert.assertTrue("Test error Division by zero", result == referenceResult);
+        }
+    }
+
 
     @Test
 
