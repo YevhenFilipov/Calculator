@@ -1,8 +1,6 @@
 package com.teamdev.calculator.impl;
 
-import com.teamdev.calculator.impl.operations.AddBinaryOperation;
-import com.teamdev.calculator.impl.operations.BinaryOperation;
-import com.teamdev.calculator.impl.operations.SubtractionBinaryOperation;
+import com.teamdev.calculator.impl.operations.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +11,9 @@ public class OperationFactory {
     private final Map<String, BinaryOperation> operationCreator = new HashMap<String, BinaryOperation>() {{
         put("+", new AddBinaryOperation());
         put("-", new SubtractionBinaryOperation());
+        put("*", new MultiplyBinaryOperation());
+        put("/", new DivisionBinaryOperation());
+        put("^", new PowerBinaryOperation());
     }};
 
     public BinaryOperation createOperation(String operationPresentation) {

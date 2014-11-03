@@ -115,22 +115,6 @@ public class MathExpressionCalculatorTest {
     }
 
     @Test
-    public void verifyErrorDivisionByZero() {
-
-        final String inputString = "1/0";
-        final String referenceResult = "Division by zero!";
-
-        final MathExpressionCalculator calculator = new StateMachineCalculator();
-        try {
-            calculator.evaluate(inputString);
-        } catch (EvaluationException e) {
-            String result = e.getMessage();
-            Assert.assertTrue("Test error Division by zero", result == referenceResult);
-        }
-    }
-
-
-    @Test
 
     public void verifyErrorPositionForClosedBracket() {
 

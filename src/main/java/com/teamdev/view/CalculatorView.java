@@ -113,7 +113,7 @@ public class CalculatorView {
     }
 
     public static void main(String[] args) {
-        if(args.length>0 && "console".equals(args[0])) {
+        if(args.length>0 && "calculate".equals(args[0])) {
             String mathExpression = args[1];
             MathExpressionCalculator mathExpressionCalculator = new StateMachineCalculator();
             try {

@@ -4,7 +4,9 @@ import com.teamdev.calculator.impl.Operation;
 
 public abstract class BinaryOperation implements Comparable<BinaryOperation>, Operation {
     static enum Priority {
-        LOW
+        LOW,
+        MEDIUM,
+        HIGH
     }
 
     protected abstract Priority getPriority();

@@ -1,5 +1,6 @@
 package com.teamdev.calculator.impl;
 
+import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.operations.BinaryOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class EvaluationStack {
         return operandStack.pop().pop();
     }
 
-    public void executeTopOperator() {
+    public void executeTopOperator(){
 
         final Double rightOperand = operandStack.peek().pop();
         final Double leftOperand = operandStack.peek().pop();
@@ -37,13 +38,13 @@ public class EvaluationStack {
         logger.info("Current executing operation is: " + currentOperation.getClass().getSimpleName());
     }
 
-    public void popAllOperations() {
+    public void popAllOperations(){
         while (!operationStack.peek().isEmpty()) {
             executeTopOperator();
         }
     }
 
-    public void pushOperation(BinaryOperation operation) {
+    public void pushOperation(BinaryOperation operation){
         while (!operationStack.peek().isEmpty() && operationStack.peek().peek().compareTo(operation) > -1) {
             executeTopOperator();
         }
@@ -55,7 +56,7 @@ public class EvaluationStack {
         operationStack.push(new ArrayDeque<BinaryOperation>());
     }
 
-    public void pushClosingBracket() {
+    public void pushClosingBracket() throws EvaluationException{
         popAllOperations();
         operationStack.pop();
         Double result = operandStack.pop().pop();

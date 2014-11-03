@@ -1,5 +1,6 @@
 package com.teamdev.calculator.impl.parser;
 
+import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.*;
 import com.teamdev.calculator.impl.operations.BinaryOperation;
 
@@ -20,7 +21,7 @@ public class OperationParser implements MathExpressionParser {
                 final BinaryOperation newOperation = operationFactory.createOperation(operationPresentation);
                 return new EvaluationCommand() {
                     @Override
-                    public void evaluate(EvaluationStack stack) {
+                    public void evaluate(EvaluationStack stack){
                         stack.pushOperation(newOperation);
                     }
                 };

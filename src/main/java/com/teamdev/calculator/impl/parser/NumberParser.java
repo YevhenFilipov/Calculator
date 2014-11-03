@@ -23,7 +23,6 @@ public class NumberParser implements MathExpressionParser {
         if (parsePosition.getErrorIndex() != -1) {
             return null;
         }
-
         mathExpressionReader.setIndex(parsePosition.getIndex());
 
         return new EvaluationCommand() {
