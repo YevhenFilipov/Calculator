@@ -19,6 +19,10 @@ public class EndOfExpressionParser implements MathExpressionParser {
                         "Closing bracket is missing for opening bracket, perhaps, at position: "
                                 + context.getLastOpeningBracketIndex(),
                         context.getLastOpeningBracketIndex());
+                if (stack.isFunctionsAvailable()) throw new EvaluationException(
+                        "Function's closing bracket is missing for function's opening bracket, perhaps, at position: "
+                                + context.getLastFunctionIndex(),
+                        context.getLastFunctionIndex());
 
                 stack.popAllOperations();
             }

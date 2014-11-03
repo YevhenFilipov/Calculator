@@ -12,7 +12,7 @@ import java.util.Map;
 import static com.teamdev.calculator.impl.State.*;
 
 public class EvaluationService implements StateAcceptor<State, EvaluationContext, EvaluationException> {
-
+    static int f = 10;
     Logger logger = LoggerFactory.getLogger(EvaluationService.class);
     private final Map<State, MathExpressionParser> parsers = new HashMap<State, MathExpressionParser>() {{
         put(NUMBER, new NumberParser());
@@ -20,6 +20,9 @@ public class EvaluationService implements StateAcceptor<State, EvaluationContext
         put(FINISH, new EndOfExpressionParser());
         put(OPENING_BRACKET, new OpeningBracketParser());
         put(CLOSING_BRACKET, new ClosingBracketParser());
+        put(FUNCTION, new FunctionParser());
+        put(FUNCTION_CLOSING_BRACKET, new FunctionClosingBracketParser());
+        put(FUNCTION_COMMA, new FunctionCommaParser());
     }};
 
 
