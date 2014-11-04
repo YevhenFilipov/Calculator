@@ -92,6 +92,18 @@ public class MathExpressionCalculatorTest {
 
     @Test
 
+    public void verifyRightAssociatedOperation() throws EvaluationException {
+
+        final String inputString = "2^3^2";
+        final Double referenceResult = 512.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        final double result = calculator.evaluate(inputString);
+        Assert.assertTrue("Right-associated operation test", result == referenceResult);
+    }
+
+    @Test
+
     public void verifyAllBinaryOperations() throws EvaluationException {
 
         final String inputString = "2+3*2^3/2";

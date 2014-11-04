@@ -8,6 +8,11 @@ public class SubtractionBinaryOperation extends BinaryOperation {
     }
 
     @Override
+    public boolean isRightAssociatedOperation() {
+        return false;
+    }
+
+    @Override
     public double execute(double leftOperand, double rightOperand) {
         return leftOperand - rightOperand;
     }

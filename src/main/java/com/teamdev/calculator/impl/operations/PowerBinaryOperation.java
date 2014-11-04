@@ -8,6 +8,11 @@ public class PowerBinaryOperation extends BinaryOperation {
     }
 
     @Override
+    public boolean isRightAssociatedOperation() {
+        return true;
+    }
+
+    @Override
     public double execute(double leftOperand, double rightOperand) {
         return Math.pow(leftOperand, rightOperand);
 

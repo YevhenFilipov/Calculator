@@ -8,6 +8,11 @@ public class AddBinaryOperation extends BinaryOperation {
     }
 
     @Override
+    public boolean isRightAssociatedOperation() {
+        return false;
+    }
+
+    @Override
     protected Priority getPriority() {
         return Priority.LOW;
     }

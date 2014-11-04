@@ -11,6 +11,8 @@ public abstract class BinaryOperation implements Comparable<BinaryOperation>, Op
 
     protected abstract Priority getPriority();
 
+    public abstract boolean isRightAssociatedOperation();
+
     @Override
     public int compareTo(BinaryOperation binaryOperation) {
         final BinaryOperation otherBinaryOperation = binaryOperation;
