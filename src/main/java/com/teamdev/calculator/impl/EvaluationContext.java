@@ -12,7 +12,6 @@ public class EvaluationContext implements StateMachineContext<State, EvaluationC
 
     private int lastOpeningBracketIndex = 0;
     private int lastFunctionIndex = 0;
-    private Deque<Boolean> functionCommasParsingAvailable = new ArrayDeque<Boolean>();
     private final EvaluationMatrix matrix = new EvaluationMatrix();
     private final EvaluationService evaluationService = new EvaluationService();
     private final EvaluationStack evaluationStack = new EvaluationStack();
@@ -28,25 +27,12 @@ public class EvaluationContext implements StateMachineContext<State, EvaluationC
         this.lastFunctionIndex = lastFunctionIndex;
     }
 
-    public boolean isFunctionCommasParsingAvailable() {
-        return functionCommasParsingAvailable.peek();
-    }
-
-    public void setFunctionCommasParsingAvailable(boolean functionCommasParsingAvailable) {
-        this.functionCommasParsingAvailable.push(functionCommasParsingAvailable);
-    }
-
-    public void popFromFunctionCommasParsingAvailableQuene() {
-        functionCommasParsingAvailable.pop();
-    }
-
     public FunctionFactory getFunctionFactory() {
         return functionFactory;
     }
 
     public EvaluationContext(String mathExpression) {
         mathExpressionReader = new MathExpressionReader(mathExpression);
-        functionCommasParsingAvailable.push(false);
     }
 
     public MathExpressionReader getMathExpressionReader() {

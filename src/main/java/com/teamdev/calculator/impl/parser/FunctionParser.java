@@ -18,8 +18,8 @@ public class FunctionParser implements MathExpressionParser {
                 context.setLastFunctionIndex(mathExpressionReader.getIndex());
                 mathExpressionReader.incrementMathExpressionIndex(functionPresentation.length());
                 final Function newFunction = functionFactory.createFunction(functionPresentation);
-                if (!newFunction.isSingleArgumentFunction()) context.setFunctionCommasParsingAvailable(true);
-                else context.setFunctionCommasParsingAvailable(false);
+                //if (!newFunction.isSingleArgumentFunction()) context.setFunctionCommasParsingAvailable(true);
+                //else context.setFunctionCommasParsingAvailable(false);
                 return new EvaluationCommand() {
                     @Override
                     public void evaluate(EvaluationStack stack) {

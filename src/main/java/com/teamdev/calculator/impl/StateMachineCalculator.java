@@ -19,8 +19,8 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
 
     @Override
     protected void deadlock(EvaluationContext context, State currentState) throws EvaluationException {
-        throw new EvaluationException("Incorrect expression format.",
-                context.getMathExpressionReader().getIndex());
+        final int errorIndex = context.getMathExpressionReader().getIndex();
+        throw new EvaluationException("Incorrect expression format", errorIndex);
     }
 
     @Override
@@ -30,9 +30,4 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
         return result;
     }
 
-//    public static void main(String[] args) throws EvaluationException {
-//        final StateMachineCalculator calculator = new StateMachineCalculator();
-//        final double result = calculator.evaluate("1+1-(2+3)");
-//        System.out.println("result = " + result);
-//    }
 }

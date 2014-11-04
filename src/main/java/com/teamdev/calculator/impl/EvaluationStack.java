@@ -68,13 +68,18 @@ public class EvaluationStack {
     public void pushClosingBracket() throws EvaluationException {
         popAllOperations();
         operationStack.pop();
-        //functionStack.pop();
         Double result = operandStack.pop().pop();
         operandStack.peek().push(result);
     }
 
     public boolean isOperationStackHaveBrackets() {
         return operationStack.size() > 1;
+    }
+
+    public boolean isFunctionCommasParsingAvailable(){
+
+        if(functionStack.isEmpty()) return false;
+        else return !functionStack.peek().isSingleArgumentFunction();
     }
 
     public void executeFunction() {

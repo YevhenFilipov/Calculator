@@ -9,7 +9,8 @@ public class FunctionCommaParser implements MathExpressionParser {
 
         final MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
 
-        if (mathExpressionReader.isEndOfMathExpression() || !context.isFunctionCommasParsingAvailable())
+        if (mathExpressionReader.isEndOfMathExpression() ||
+                !context.getEvaluationStack().isFunctionCommasParsingAvailable())
             return null;
 
         final String symbolPresentation = MathExpressionSymbols.FUNCTION_COMMA.getSymbolPresentation();

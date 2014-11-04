@@ -15,7 +15,7 @@ public class FunctionClosingBracketParser implements MathExpressionParser {
         final String symbolPresentation = MathExpressionSymbols.FUNCTION_CLOSING_BRACKET.getSymbolPresentation();
         if (mathExpressionReader.getRemainingMathExpression().startsWith(symbolPresentation)) {
             mathExpressionReader.incrementMathExpressionIndex(symbolPresentation.length());
-            context.popFromFunctionCommasParsingAvailableQuene();
+            //context.popFromFunctionCommasParsingAvailableQuene();
             return new EvaluationCommand() {
                 @Override
                 public void evaluate(EvaluationStack stack) throws EvaluationException {
