@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class StateMachineCalculator extends FiniteStateMachine<State, EvaluationContext, Double, EvaluationException>
         implements MathExpressionCalculator {
 
-    private final Logger logger = LoggerFactory.getLogger(StateMachineCalculator.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public double evaluate(String mathExpression) throws EvaluationException {
@@ -20,7 +20,8 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
     @Override
     protected void deadlock(EvaluationContext context, State currentState) throws EvaluationException {
         final int errorIndex = context.getMathExpressionReader().getIndex();
-        throw new EvaluationException("Incorrect expression format", errorIndex);
+        logger.error("Incorrect expression format at position " + errorIndex);
+        throw new EvaluationException("Incorrect expression format at position " + errorIndex, errorIndex);
     }
 
     @Override

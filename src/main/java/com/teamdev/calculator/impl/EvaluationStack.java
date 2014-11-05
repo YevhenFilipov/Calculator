@@ -10,7 +10,7 @@ import java.util.Deque;
 
 public class EvaluationStack {
 
-    private final Logger logger = LoggerFactory.getLogger(EvaluationStack.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
     private final Deque<Deque<BinaryOperation>> operationStack = new ArrayDeque<Deque<BinaryOperation>>();
     private final Deque<Function> functionStack = new ArrayDeque<Function>();

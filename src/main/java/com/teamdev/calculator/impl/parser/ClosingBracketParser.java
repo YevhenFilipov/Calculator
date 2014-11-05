@@ -2,8 +2,12 @@ package com.teamdev.calculator.impl.parser;
 
 import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClosingBracketParser implements MathExpressionParser {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 
@@ -19,12 +23,16 @@ public class ClosingBracketParser implements MathExpressionParser {
                 @Override
                 public void evaluate(EvaluationStack stack) throws EvaluationException {
 
-                    if (!stack.isOperationStackHaveBrackets()) throw new EvaluationException(
-                            "Error during evaluating: "
-                                    + symbolPresentation
-                                    + ". Opening bracket is missing for bracket at position: "
-                                    + mathExpressionReader.getIndex(),
-                            mathExpressionReader.getIndex());
+                    if (!stack.isOperationStackHaveBrackets()) {
+
+                        final String message = "Error during evaluating: "
+                                + symbolPresentation
+                                + ". Opening bracket is missing for bracket at position: "
+                                + mathExpressionReader.getIndex();
+
+                        logger.error(message);
+                        throw new EvaluationException(message, mathExpressionReader.getIndex());
+                    }
 
                     stack.pushClosingBracket();
                 }
