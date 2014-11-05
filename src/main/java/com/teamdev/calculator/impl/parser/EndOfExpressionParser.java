@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class EndOfExpressionParser implements MathExpressionParser {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(EndOfExpressionParser.class);
 
     @Override
     public EvaluationCommand parse(final EvaluationContext context) throws EvaluationException {

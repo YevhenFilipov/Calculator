@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class FunctionClosingBracketParser implements MathExpressionParser {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
 
     @Override
     public EvaluationCommand parse(EvaluationContext context) {

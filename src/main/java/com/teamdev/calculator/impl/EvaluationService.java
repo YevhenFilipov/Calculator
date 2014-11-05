@@ -12,7 +12,7 @@ import java.util.Map;
 import static com.teamdev.calculator.impl.State.*;
 
 public class EvaluationService implements StateAcceptor<State, EvaluationContext, EvaluationException> {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(EvaluationService.class);
     private final Map<State, MathExpressionParser> parsers = new HashMap<State, MathExpressionParser>() {{
         put(NUMBER, new NumberParser());
         put(BINARY_OPERATION, new OperationParser());

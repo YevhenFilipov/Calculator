@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class StateMachineCalculator extends FiniteStateMachine<State, EvaluationContext, Double, EvaluationException>
         implements MathExpressionCalculator {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(StateMachineCalculator.class);
 
     @Override
     public double evaluate(String mathExpression) throws EvaluationException {

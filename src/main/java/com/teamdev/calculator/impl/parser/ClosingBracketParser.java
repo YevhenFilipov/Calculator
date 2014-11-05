@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ClosingBracketParser implements MathExpressionParser {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(ClosingBracketParser.class);
 
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
