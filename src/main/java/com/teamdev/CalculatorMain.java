@@ -9,7 +9,6 @@ public class CalculatorMain {
         if (args.length > 0 && "console".equals(args[0])) {
             ConsoleView consoleView = new ConsoleView();
             consoleView.consoleCalculate();
-
         } else new CalculatorView();
     }
 }
