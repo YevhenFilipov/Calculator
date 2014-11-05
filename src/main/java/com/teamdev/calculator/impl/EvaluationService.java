@@ -37,6 +37,7 @@ public class EvaluationService implements StateAcceptor<State, EvaluationContext
         }
 
         context.getMathExpressionReader().skipWhiteSpaces();
+        context.getMathExpressionReader().skipEnterCharacters();
 
         final EvaluationCommand evaluationCommand = parser.parse(context);
         if (evaluationCommand == null) {
