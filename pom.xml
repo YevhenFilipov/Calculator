@@ -44,7 +44,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.teamdev.MainClass</mainClass>
+                            <mainClass>com.teamdev.CalculatorMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
