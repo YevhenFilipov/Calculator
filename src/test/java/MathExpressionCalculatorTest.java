@@ -212,6 +212,38 @@ public class MathExpressionCalculatorTest {
 
     @Test
 
+     public void verifyErrorPositionForFunctionClosedBracket() {
+
+        final String inputString = "1+sum[1;2";
+        final Double referenceResult = 2.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        try {
+            calculator.evaluate(inputString);
+        } catch (EvaluationException e) {
+            int result = e.getErrorIndex();
+            Assert.assertTrue("Test error position for function's closing bracket", result == referenceResult);
+        }
+    }
+
+    @Test
+
+    public void verifyErrorPositionForFunctionOpeningBracket() {
+
+        final String inputString = "1+sqrt[sum[8;8]";
+        final Double referenceResult = 7.0;
+
+        final MathExpressionCalculator calculator = new StateMachineCalculator();
+        try {
+            calculator.evaluate(inputString);
+        } catch (EvaluationException e) {
+            int result = e.getErrorIndex();
+            Assert.assertTrue("Test error position for function's closing bracket", result == referenceResult);
+        }
+    }
+
+    @Test
+
     public void verifyErrorPositionForClosedBracket() {
 
         final String inputString = "1+1-(4-(2+3)-3+5";

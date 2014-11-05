@@ -15,12 +15,13 @@ public class EndOfExpressionParser implements MathExpressionParser {
             @Override
             public void evaluate(EvaluationStack stack) throws EvaluationException {
 
-                if (stack.isOperationStackHaveBrackets()) throw new EvaluationException(
+                if (stack.isOperationStackHaveBrackets() &&
+                    !stack.isFunctionsAvailable()) throw new EvaluationException(
                         "Closing bracket is missing for opening bracket, perhaps, at position: "
                                 + context.getLastOpeningBracketIndex(),
                         context.getLastOpeningBracketIndex());
                 if (stack.isFunctionsAvailable()) throw new EvaluationException(
-                        "Function's closing bracket is missing for function's opening bracket, perhaps, at position: "
+                        "Function's closing bracket is missing for function, perhaps, at position: "
                                 + context.getLastFunctionIndex(),
                         context.getLastFunctionIndex());
 

@@ -65,8 +65,8 @@ public class EvaluationStack {
 
     public void pushOperation(BinaryOperation operation) {
         while (!operationStack.peek().isEmpty() &&
-               operationStack.peek().peek().compareTo(operation) > -1 &&
-               !operation.isRightAssociatedOperation()) {
+                operationStack.peek().peek().compareTo(operation) > -1 &&
+                !operation.isRightAssociatedOperation()) {
             executeTopOperator();
         }
         operationStack.peek().push(operation);
@@ -89,8 +89,7 @@ public class EvaluationStack {
 
     public boolean isFunctionCommasParsingAvailable(){
 
-        if(functionStack.isEmpty()) return false;
-        else return !functionStack.peek().isSingleArgumentFunction();
+        return !functionStack.isEmpty() && !functionStack.peek().isSingleArgumentFunction();
     }
 
     public void executeFunction() {
