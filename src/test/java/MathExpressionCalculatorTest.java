@@ -212,7 +212,7 @@ public class MathExpressionCalculatorTest {
 
     @Test
 
-     public void verifyErrorPositionForFunctionClosedBracket() {
+    public void verifyErrorPositionForFunctionClosedBracket() {
 
         final String inputString = "1+sum[1;2";
         final Double referenceResult = 2.0;

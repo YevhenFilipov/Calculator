@@ -22,13 +22,13 @@ public class MathExpressionReader {
 
     public void skipWhiteSpaces() {
         while (!isEndOfMathExpression() && Character.isWhitespace(mathExpression.charAt(index))) {
-               incrementMathExpressionIndex(1);
+            incrementMathExpressionIndex(1);
         }
     }
 
     public void skipEnterCharacters() {
         while (!isEndOfMathExpression() && (mathExpression.charAt(index)) == '\n') {
-               incrementMathExpressionIndex(1);
+            incrementMathExpressionIndex(1);
         }
     }
 

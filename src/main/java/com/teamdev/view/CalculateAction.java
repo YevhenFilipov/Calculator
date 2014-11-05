@@ -10,7 +10,6 @@ public class CalculateAction implements Action {
 
         MathExpressionCalculator mathExpressionCalculator = new StateMachineCalculator();
         Double resultDouble = mathExpressionCalculator.evaluate(mathExpression);
-        String resultString = resultDouble.toString();
-        return resultString;
+        return resultDouble.toString();
     }
 }

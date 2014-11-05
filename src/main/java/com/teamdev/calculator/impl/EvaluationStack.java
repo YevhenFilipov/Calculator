@@ -87,7 +87,7 @@ public class EvaluationStack {
         return operationStack.size() > 1;
     }
 
-    public boolean isFunctionCommasParsingAvailable(){
+    public boolean isFunctionCommasParsingAvailable() {
 
         return !functionStack.isEmpty() && !functionStack.peek().isSingleArgumentFunction();
     }

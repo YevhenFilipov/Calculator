@@ -5,9 +5,6 @@ import com.teamdev.fsm.StateAcceptor;
 import com.teamdev.fsm.StateMachineContext;
 import com.teamdev.fsm.TransitionMatrix;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 public class EvaluationContext implements StateMachineContext<State, EvaluationContext, EvaluationException> {
 
     private int lastOpeningBracketIndex = 0;

@@ -92,6 +92,7 @@ public class CalculatorView {
         mainFrame.pack();
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
+        mainFrame.setLocationRelativeTo(null);
     }
 
     public String getEvaluationExpressionText() {
