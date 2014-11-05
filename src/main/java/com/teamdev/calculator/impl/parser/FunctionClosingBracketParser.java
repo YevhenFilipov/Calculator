@@ -2,12 +2,12 @@ package com.teamdev.calculator.impl.parser;
 
 import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 public class FunctionClosingBracketParser implements MathExpressionParser {
 
-    private final Logger logger = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
+//    private final Logger logger = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
 
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
@@ -30,7 +30,7 @@ public class FunctionClosingBracketParser implements MathExpressionParser {
                                 + ". Function is missing for function's closing bracket at position: "
                                 + mathExpressionReader.getIndex();
 
-                        logger.error(ErrorMessage);
+//                        logger.error(ErrorMessage);
                         throw new EvaluationException(ErrorMessage, mathExpressionReader.getIndex());
                     }
                     stack.executeFunction();
