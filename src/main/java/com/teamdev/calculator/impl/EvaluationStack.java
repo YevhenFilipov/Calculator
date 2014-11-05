@@ -54,15 +54,6 @@ public class EvaluationStack {
         }
     }
 
-//    public void pushOperation(BinaryOperation operation) {
-//        while (!operationStack.peek().isEmpty() &&
-//               operationStack.peek().peek().compareTo(operation) > -1 &&
-//               !operationStack.peek().peek().isRightAssociatedOperation()) {
-//            executeTopOperator();
-//        }
-//        operationStack.peek().push(operation);
-//    }
-
     public void pushOperation(BinaryOperation operation) {
         while (!operationStack.peek().isEmpty() &&
                 operationStack.peek().peek().compareTo(operation) > -1 &&
