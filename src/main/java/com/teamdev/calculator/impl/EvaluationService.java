@@ -12,7 +12,7 @@ import java.util.Map;
 import static com.teamdev.calculator.impl.State.*;
 
 public class EvaluationService implements StateAcceptor<State, EvaluationContext, EvaluationException> {
-    private final Logger logger = LoggerFactory.getLogger(EvaluationService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationService.class);
     private final Map<State, MathExpressionParser> parsers = new HashMap<State, MathExpressionParser>() {{
         put(NUMBER, new NumberParser());
         put(BINARY_OPERATION, new OperationParser());
@@ -31,7 +31,8 @@ public class EvaluationService implements StateAcceptor<State, EvaluationContext
         final MathExpressionParser parser = parsers.get(possibleState);
 
         if (parser == null) {
-            logger.error("Parser not found for state: " + possibleState);
+            if (LOGGER.isErrorEnabled())
+                LOGGER.error("Parser not found for state: " + possibleState);
             throw new EvaluationException("Parser not found for state: " + possibleState,
                     context.getMathExpressionReader().getIndex());
         }
@@ -41,13 +42,15 @@ public class EvaluationService implements StateAcceptor<State, EvaluationContext
 
         final EvaluationCommand evaluationCommand = parser.parse(context);
         if (evaluationCommand == null) {
-            logger.trace("Current state is " + possibleState.toString() + "\n"
-                    + "Parsing with " + parser.getClass().getSimpleName()
-                    + ": Unsuccessful");
+            if (LOGGER.isTraceEnabled())
+                LOGGER.trace("Current state is " + possibleState.toString() + "\n"
+                        + "Parsing with " + parser.getClass().getSimpleName()
+                        + ": Unsuccessful");
             return false;
         }
         evaluationCommand.evaluate(context.getEvaluationStack());
-        logger.info("Current state is " + possibleState.toString());
+        if (LOGGER.isInfoEnabled())
+            LOGGER.info("Current state is " + possibleState.toString());
         return true;
     }
 }

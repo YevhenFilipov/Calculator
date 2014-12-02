@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class FunctionClosingBracketParser implements MathExpressionParser {
 
-    private final Logger logger = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
 
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
@@ -30,7 +30,8 @@ public class FunctionClosingBracketParser implements MathExpressionParser {
                                 + ". Function is missing for function's closing bracket at position: "
                                 + mathExpressionReader.getIndex();
 
-                        logger.error(ErrorMessage);
+                        if (LOGGER.isErrorEnabled())
+                            LOGGER.error(ErrorMessage);
                         throw new EvaluationException(ErrorMessage, mathExpressionReader.getIndex());
                     }
                     stack.executeFunction();

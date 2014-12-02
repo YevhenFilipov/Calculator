@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ClosingBracketParser implements MathExpressionParser {
-    private final Logger logger = LoggerFactory.getLogger(ClosingBracketParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClosingBracketParser.class);
 
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
@@ -30,7 +30,8 @@ public class ClosingBracketParser implements MathExpressionParser {
                                 + ". Opening bracket is missing for bracket at position: "
                                 + mathExpressionReader.getIndex();
 
-                        logger.error(message);
+                        if (LOGGER.isErrorEnabled())
+                            LOGGER.error(message);
                         throw new EvaluationException(message, mathExpressionReader.getIndex());
                     }
 

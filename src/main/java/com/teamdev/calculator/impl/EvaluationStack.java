@@ -10,7 +10,7 @@ import java.util.Deque;
 
 public class EvaluationStack {
 
-    private final Logger logger = LoggerFactory.getLogger(EvaluationStack.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationStack.class);
     private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
     private final Deque<Deque<BinaryOperation>> operationStack = new ArrayDeque<Deque<BinaryOperation>>();
     private final Deque<Function> functionStack = new ArrayDeque<Function>();
@@ -45,7 +45,8 @@ public class EvaluationStack {
 
         final Double result = currentOperation.execute(leftOperand, rightOperand);
         operandStack.peek().push(result);
-        logger.info("Current executing operation is: " + currentOperation.getClass().getSimpleName());
+        if (LOGGER.isInfoEnabled())
+            LOGGER.info("Current executing operation is: " + currentOperation.getClass().getSimpleName());
     }
 
     public void popAllOperations() {
@@ -91,7 +92,8 @@ public class EvaluationStack {
         } else {
             executeMultipleArgumentFunction();
         }
-        logger.info("Current executing function is: " + function.getClass().getSimpleName());
+        if (LOGGER.isInfoEnabled())
+            LOGGER.info("Current executing function is: " + function.getClass().getSimpleName());
     }
 
     private void executeSingleArgumentFunction() {
