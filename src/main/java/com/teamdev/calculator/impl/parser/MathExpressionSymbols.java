@@ -4,7 +4,8 @@ public enum MathExpressionSymbols {
     OPENING_BRACKET("("),
     CLOSING_BRACKET(")"),
     FUNCTION_CLOSING_BRACKET("]"),
-    FUNCTION_COMMA(";");
+    FUNCTION_SEMICOLON(";"),
+    FUNCTION_COMMA(",");
 
     private final String symbolPresentation;
 

@@ -14,6 +14,7 @@ public class NumberParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 
+        numberFormat.setGroupingUsed(false);
         final MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
         final String mathExpression = mathExpressionReader.getMathExpression();
         final int index = mathExpressionReader.getIndex();

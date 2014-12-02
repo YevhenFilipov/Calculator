@@ -1,7 +1,12 @@
 package com.teamdev.view;
 
 import javax.swing.*;
+import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 public class CalculatorView {
 
@@ -16,10 +21,11 @@ public class CalculatorView {
         calculatorContent.setLayout(borderLayout);
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-        evaluationExpressionArea = new JTextArea("", 2, 15);
+        evaluationExpressionArea = new JTextArea(3, 15);
         evaluationExpressionArea.setLineWrap(true);
 
         JScrollPane evaluationExpressionField = new JScrollPane(evaluationExpressionArea);
+
 
         resultField = new JTextField("0", 15);
         resultField.setHorizontalAlignment(JTextField.RIGHT);
@@ -89,10 +95,13 @@ public class CalculatorView {
         mainFrame.setContentPane(calculatorContent);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        mainFrame.pack();
+       mainFrame.pack();
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
+
+        enableGlobalHotKeys();
+
     }
 
     public String getEvaluationExpressionText() {
@@ -109,5 +118,31 @@ public class CalculatorView {
         JOptionPane.showMessageDialog(buttonCalculate, textErrorMessage, "Warning!", JOptionPane.WARNING_MESSAGE);
     }
 
+    private HashMap<KeyStroke, String> actionMap = new HashMap<KeyStroke, String>();
 
+    private void enableGlobalHotKeys() {
+        KeyStroke key1 = KeyStroke.getKeyStroke('\n');
+        actionMap.put(key1, ButtonLabel.CALCULATE.getLabelName());
+        final ActionListener actionListener = new CalculatorListener(this);
+
+        KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        kfm.addKeyEventDispatcher(new KeyEventDispatcher() {
+
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(e);
+                if (actionMap.containsKey(keyStroke)) {
+                    final ActionEvent actionEvent = new ActionEvent(e.getSource(), e.getID(), actionMap.get(keyStroke));
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            actionListener.actionPerformed(actionEvent);
+                        }
+                    });
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 }
