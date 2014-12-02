@@ -123,6 +123,7 @@ public class CalculatorView {
     private void enableGlobalHotKeys() {
         KeyStroke key1 = KeyStroke.getKeyStroke('\n');
         actionMap.put(key1, ButtonLabel.CALCULATE.getLabelName());
+
         final ActionListener actionListener = new CalculatorListener(this);
 
         KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
@@ -130,7 +131,7 @@ public class CalculatorView {
 
             @Override
             public boolean dispatchKeyEvent(KeyEvent e) {
-                KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(e);
+                final KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(e);
                 if (actionMap.containsKey(keyStroke)) {
                     final ActionEvent actionEvent = new ActionEvent(e.getSource(), e.getID(), actionMap.get(keyStroke));
                     SwingUtilities.invokeLater(new Runnable() {

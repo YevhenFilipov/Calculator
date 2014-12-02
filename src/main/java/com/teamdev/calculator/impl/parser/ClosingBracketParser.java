@@ -2,11 +2,11 @@ package com.teamdev.calculator.impl.parser;
 
 import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.*;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClosingBracketParser implements MathExpressionParser {
-//    private final Logger logger = LoggerFactory.getLogger(ClosingBracketParser.class);
+    private final Logger logger = LoggerFactory.getLogger(ClosingBracketParser.class);
 
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
@@ -30,7 +30,7 @@ public class ClosingBracketParser implements MathExpressionParser {
                                 + ". Opening bracket is missing for bracket at position: "
                                 + mathExpressionReader.getIndex();
 
-//                        logger.error(message);
+                        logger.error(message);
                         throw new EvaluationException(message, mathExpressionReader.getIndex());
                     }
 

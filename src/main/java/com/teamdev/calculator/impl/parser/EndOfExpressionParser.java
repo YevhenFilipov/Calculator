@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class EndOfExpressionParser implements MathExpressionParser {
 
-//    private final Logger logger = LoggerFactory.getLogger(EndOfExpressionParser.class);
+    private final Logger logger = LoggerFactory.getLogger(EndOfExpressionParser.class);
 
     @Override
     public EvaluationCommand parse(final EvaluationContext context) throws EvaluationException {
@@ -24,14 +24,14 @@ public class EndOfExpressionParser implements MathExpressionParser {
                     final String errorMessage = "Closing bracket is missing for opening bracket, perhaps, at position: "
                             + context.getLastOpeningBracketIndex();
 
-//                    logger.error(errorMessage);
+                    logger.error(errorMessage);
                     throw new EvaluationException(errorMessage, context.getLastOpeningBracketIndex());
                 }
                 if (stack.isFunctionsAvailable()) {
                     final String errorMessage = "Function's closing bracket is missing for function, perhaps, at position: "
                             + context.getLastFunctionIndex();
 
-//                    logger.error(errorMessage);
+                    logger.error(errorMessage);
                     throw new EvaluationException(errorMessage, context.getLastFunctionIndex());
                 }
 
