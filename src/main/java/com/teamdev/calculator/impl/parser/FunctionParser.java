@@ -2,7 +2,7 @@ package com.teamdev.calculator.impl.parser;
 
 import com.teamdev.calculator.impl.*;
 
-public class FunctionParser implements MathExpressionParser {
+public final class FunctionParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 

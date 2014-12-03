@@ -1,14 +1,13 @@
 package com.teamdev.view;
 
 import javax.swing.*;
-import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
-public class CalculatorView {
+public final class CalculatorView {
 
     private JTextArea evaluationExpressionArea;
     private final JButton buttonCalculate;

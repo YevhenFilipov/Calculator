@@ -10,7 +10,7 @@ import static com.teamdev.calculator.impl.State.*;
 import static java.util.EnumSet.noneOf;
 import static java.util.EnumSet.of;
 
-public class EvaluationMatrix implements TransitionMatrix<State> {
+public final class EvaluationMatrix implements TransitionMatrix<State> {
 
     private final Map<State, Set<State>> transitions = new HashMap<State, Set<State>>() {{
         put(START, of(NUMBER, OPENING_BRACKET, FUNCTION));

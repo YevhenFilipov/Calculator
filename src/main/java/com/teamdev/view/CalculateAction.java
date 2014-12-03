@@ -4,7 +4,7 @@ import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.MathExpressionCalculator;
 import com.teamdev.calculator.impl.StateMachineCalculator;
 
-public class CalculateAction implements Action {
+public final class CalculateAction implements Action {
     @Override
     public String execute(String mathExpression) throws EvaluationException {
 

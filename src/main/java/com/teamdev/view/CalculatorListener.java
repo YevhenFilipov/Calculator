@@ -5,7 +5,7 @@ import com.teamdev.calculator.EvaluationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CalculatorListener implements ActionListener {
+public final class CalculatorListener implements ActionListener {
 
     CalculatorView parent;
 

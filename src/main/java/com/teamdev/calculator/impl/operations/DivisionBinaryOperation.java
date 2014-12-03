@@ -1,6 +1,6 @@
 package com.teamdev.calculator.impl.operations;
 
-public class DivisionBinaryOperation extends BinaryOperation {
+public final class DivisionBinaryOperation extends BinaryOperation {
 
     @Override
     protected Priority getPriority() {

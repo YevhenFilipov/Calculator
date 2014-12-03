@@ -5,7 +5,7 @@ import com.teamdev.calculator.impl.MultipleArgumentFunction;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class SumFunction implements MultipleArgumentFunction {
+public final class SumFunction implements MultipleArgumentFunction {
 
     @Override
     public boolean isSingleArgumentFunction() {

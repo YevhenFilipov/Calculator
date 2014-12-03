@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.Locale;
 
-public class NumberParser implements MathExpressionParser {
+public final class NumberParser implements MathExpressionParser {
 
     private final NumberFormat numberFormat = DecimalFormat.getNumberInstance(Locale.US);
 

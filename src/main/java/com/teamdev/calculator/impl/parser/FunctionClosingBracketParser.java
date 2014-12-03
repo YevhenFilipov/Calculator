@@ -5,7 +5,7 @@ import com.teamdev.calculator.impl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FunctionClosingBracketParser implements MathExpressionParser {
+public final class FunctionClosingBracketParser implements MathExpressionParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
 

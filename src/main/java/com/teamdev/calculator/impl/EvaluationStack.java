@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class EvaluationStack {
+public final class EvaluationStack {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationStack.class);
     private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
@@ -98,14 +98,14 @@ public class EvaluationStack {
 
     private void executeSingleArgumentFunction() {
 
-        final Function currentFunction = functionStack.pop();
+        final Function<Double> currentFunction = functionStack.pop();
         final double result = currentFunction.execute(operandStack.pop().pop());
         operationStack.pop();
         operandStack.peek().push(result);
     }
 
     private void executeMultipleArgumentFunction() {
-        final Function currentFunction = functionStack.pop();
+        final Function<Deque<Double>> currentFunction = functionStack.pop();
         final double result = currentFunction.execute(operandStack.pop());
         operationStack.pop();
         operandStack.peek().push(result);

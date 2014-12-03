@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class OperationFactory {
+public final class OperationFactory {
 
     private final Map<String, BinaryOperation> operationCreator = new HashMap<String, BinaryOperation>() {{
         put("+", new AddBinaryOperation());

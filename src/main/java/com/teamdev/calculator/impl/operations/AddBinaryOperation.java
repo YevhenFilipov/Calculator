@@ -1,6 +1,6 @@
 package com.teamdev.calculator.impl.operations;
 
-public class AddBinaryOperation extends BinaryOperation {
+public final class AddBinaryOperation extends BinaryOperation {
 
     @Override
     public double execute(double leftOperand, double rightOperand) {

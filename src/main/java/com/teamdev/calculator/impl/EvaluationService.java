@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static com.teamdev.calculator.impl.State.*;
 
-public class EvaluationService implements StateAcceptor<State, EvaluationContext, EvaluationException> {
+public final class EvaluationService implements StateAcceptor<State, EvaluationContext, EvaluationException> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationService.class);
     private final Map<State, MathExpressionParser> parsers = new HashMap<State, MathExpressionParser>() {{
         put(NUMBER, new NumberParser());

@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-public class MaxFunction implements MultipleArgumentFunction {
+public final class MaxFunction implements MultipleArgumentFunction {
 
     @Override
     public double execute(Collection<Double> arguments) {

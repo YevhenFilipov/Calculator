@@ -3,7 +3,7 @@ package com.teamdev.calculator.impl.parser;
 import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.*;
 
-public class FunctionCommaParser implements MathExpressionParser {
+public final class FunctionCommaParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 

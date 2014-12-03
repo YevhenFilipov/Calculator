@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-public class MinFunction implements MultipleArgumentFunction {
+public final class MinFunction implements MultipleArgumentFunction {
 
     @Override
     public boolean isSingleArgumentFunction() {

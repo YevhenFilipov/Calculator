@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class FunctionFactory {
+public final class FunctionFactory {
 
     private final Map<String, Function> functionFactoryMap = new HashMap<String, Function>() {{
         put("max[", new MaxFunction());
