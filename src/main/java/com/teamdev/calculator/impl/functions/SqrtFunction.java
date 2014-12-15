@@ -1,16 +1,17 @@
 package com.teamdev.calculator.impl.functions;
 
-import com.teamdev.calculator.impl.SingleArgumentFunction;
+import com.teamdev.calculator.impl.Function;
 
-public final class SqrtFunction implements SingleArgumentFunction {
+import java.util.Arrays;
 
-    @Override
-    public boolean isSingleArgumentFunction() {
-        return true;
-    }
+public class SqrtFunction implements Function {
 
     @Override
-    public double execute(Double argument) {
+    public Double execute(Double... arguments) {
+        if (arguments.length > 1) {
+            return null;
+        }
+        final Double argument = Arrays.asList(arguments).get(0);
         return Math.sqrt(argument);
     }
 }

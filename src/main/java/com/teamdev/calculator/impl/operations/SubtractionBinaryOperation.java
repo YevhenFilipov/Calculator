@@ -1,6 +1,6 @@
 package com.teamdev.calculator.impl.operations;
 
-public final class SubtractionBinaryOperation extends BinaryOperation {
+public class SubtractionBinaryOperation extends BinaryOperation {
 
     @Override
     protected Priority getPriority() {

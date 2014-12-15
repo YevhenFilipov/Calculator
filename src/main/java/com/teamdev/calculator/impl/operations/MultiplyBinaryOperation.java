@@ -1,6 +1,6 @@
 package com.teamdev.calculator.impl.operations;
 
-public final class MultiplyBinaryOperation extends BinaryOperation {
+public class MultiplyBinaryOperation extends BinaryOperation {
 
     @Override
     public boolean isRightAssociatedOperation() {

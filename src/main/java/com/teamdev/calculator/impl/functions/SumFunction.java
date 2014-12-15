@@ -1,22 +1,14 @@
 package com.teamdev.calculator.impl.functions;
 
-import com.teamdev.calculator.impl.MultipleArgumentFunction;
+import com.teamdev.calculator.impl.Function;
 
-import java.util.Collection;
-import java.util.Iterator;
-
-public final class SumFunction implements MultipleArgumentFunction {
+public class SumFunction implements Function {
 
     @Override
-    public boolean isSingleArgumentFunction() {
-        return false;
-    }
-
-    @Override
-    public double execute(Collection<Double> arguments) {
+    public Double execute(Double... arguments) {
         Double result = 0d;
-        for (Iterator<Double> currentArgument = arguments.iterator(); currentArgument.hasNext(); ) {
-            result += currentArgument.next();
+        for (Double argument : arguments) {
+            result += argument;
         }
         return result;
     }

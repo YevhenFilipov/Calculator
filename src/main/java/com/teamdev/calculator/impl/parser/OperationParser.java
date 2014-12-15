@@ -3,7 +3,7 @@ package com.teamdev.calculator.impl.parser;
 import com.teamdev.calculator.impl.*;
 import com.teamdev.calculator.impl.operations.BinaryOperation;
 
-public final class OperationParser implements MathExpressionParser {
+public class OperationParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 

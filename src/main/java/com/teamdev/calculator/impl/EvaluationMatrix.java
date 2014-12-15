@@ -10,17 +10,16 @@ import static com.teamdev.calculator.impl.State.*;
 import static java.util.EnumSet.noneOf;
 import static java.util.EnumSet.of;
 
-public final class EvaluationMatrix implements TransitionMatrix<State> {
+public class EvaluationMatrix implements TransitionMatrix<State> {
 
     private final Map<State, Set<State>> transitions = new HashMap<State, Set<State>>() {{
         put(START, of(NUMBER, OPENING_BRACKET, FUNCTION));
-        put(NUMBER, of(FINISH, BINARY_OPERATION, CLOSING_BRACKET, FUNCTION_CLOSING_BRACKET, FUNCTION_COMMA));
+        put(NUMBER, of(FINISH, BINARY_OPERATION, CLOSING_BRACKET, FUNCTION_COMMA));
         put(BINARY_OPERATION, of(NUMBER, OPENING_BRACKET, FUNCTION));
         put(OPENING_BRACKET, of(OPENING_BRACKET, NUMBER, FUNCTION));
-        put(CLOSING_BRACKET, of(CLOSING_BRACKET, FUNCTION_CLOSING_BRACKET, BINARY_OPERATION, FINISH));
-        put(FUNCTION, of(NUMBER, OPENING_BRACKET, FUNCTION));
+        put(CLOSING_BRACKET, of(CLOSING_BRACKET, FUNCTION_COMMA, BINARY_OPERATION, FINISH));
+        put(FUNCTION, of(OPENING_BRACKET));
         put(FUNCTION_COMMA, of(OPENING_BRACKET, NUMBER, FUNCTION));
-        put(FUNCTION_CLOSING_BRACKET, of(CLOSING_BRACKET, FUNCTION_CLOSING_BRACKET, BINARY_OPERATION, FUNCTION_COMMA, FINISH));
         put(FINISH, noneOf(State.class));
     }};
 

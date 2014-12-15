@@ -8,13 +8,15 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public final class EvaluationStack {
+public class EvaluationStack {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationStack.class);
     private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
     private final Deque<Deque<BinaryOperation>> operationStack = new ArrayDeque<Deque<BinaryOperation>>();
     private final Deque<Function> functionStack = new ArrayDeque<Function>();
     private final Deque<Integer> sizeOfOperationStack = new ArrayDeque<Integer>();
+    private final Deque<Integer> bracketNumberOfTopFunction = new ArrayDeque<Integer>();
+    private int bracketsCount;
 
     public EvaluationStack() {
         operandStack.push(new ArrayDeque<Double>());
@@ -65,55 +67,47 @@ public final class EvaluationStack {
     }
 
     public void pushOpeningBracket() {
+        bracketsCount++;
         pushNewEvaluationStackLevel();
     }
 
     public void pushClosingBracket() throws EvaluationException {
-        popAllOperations();
+
+        Double result;
+        if (bracketNumberOfTopFunction.isEmpty() ||
+                bracketNumberOfTopFunction.peek() != bracketsCount) {
+            popAllOperations();
+            result = operandStack.pop().pop();
+
+        } else {
+            result = executeTopFunction();
+        }
+
         operationStack.pop();
-        Double result = operandStack.pop().pop();
         operandStack.peek().push(result);
+        bracketsCount--;
     }
 
     public boolean isOperationStackHaveBrackets() {
         return operationStack.size() > 1;
     }
 
-    public boolean isFunctionCommasParsingAvailable() {
-
-        return !functionStack.isEmpty() && !functionStack.peek().isSingleArgumentFunction();
-    }
-
-    public void executeFunction() {
+    public Double executeTopFunction() {
         evaluateFunctionArgument();
-        final Function function = functionStack.peek();
-        if (function.isSingleArgumentFunction()) {
-            executeSingleArgumentFunction();
-        } else {
-            executeMultipleArgumentFunction();
-        }
+        final Function currentFunction = functionStack.pop();
+        final Deque<Double> operands = operandStack.pop();
+        final Double[] arguments = operands.toArray(new Double[operands.size()]);
+
+        final double result = currentFunction.execute(arguments);
+        bracketNumberOfTopFunction.pop();
         if (LOGGER.isInfoEnabled())
-            LOGGER.info("Current executing function is: " + function.getClass().getSimpleName());
+            LOGGER.info("Current executing function is: " + currentFunction.getClass().getSimpleName());
+        return result;
     }
 
-    private void executeSingleArgumentFunction() {
-
-        final Function<Double> currentFunction = functionStack.pop();
-        final double result = currentFunction.execute(operandStack.pop().pop());
-        operationStack.pop();
-        operandStack.peek().push(result);
-    }
-
-    private void executeMultipleArgumentFunction() {
-        final Function<Deque<Double>> currentFunction = functionStack.pop();
-        final double result = currentFunction.execute(operandStack.pop());
-        operationStack.pop();
-        operandStack.peek().push(result);
-
-    }
 
     public void pushFunction(Function function) {
-        pushNewEvaluationStackLevel();
+        bracketNumberOfTopFunction.push(bracketsCount + 1);
         pushSizeOfOperationStack();
         functionStack.push(function);
     }
@@ -122,14 +116,14 @@ public final class EvaluationStack {
         return functionStack.size() > 0;
     }
 
-    public void putFunctionComma() {
+    public void pushFunctionComma() {
         evaluateFunctionArgument();
         pushSizeOfOperationStack();
     }
 
     private void evaluateFunctionArgument() {
         int lastSizeOfOperationStack = popSizeOfOperationStack();
-        while (!(operationStack.peek().size() == lastSizeOfOperationStack)) {
+        while (operationStack.peek().size() > lastSizeOfOperationStack) {
             executeTopOperator();
         }
     }

@@ -5,7 +5,7 @@ import com.teamdev.fsm.StateAcceptor;
 import com.teamdev.fsm.StateMachineContext;
 import com.teamdev.fsm.TransitionMatrix;
 
-public final class EvaluationContext implements StateMachineContext<State, EvaluationContext, EvaluationException> {
+public class EvaluationContext implements StateMachineContext<State, EvaluationContext, EvaluationException> {
 
     private int lastOpeningBracketIndex = 0;
     private int lastFunctionIndex = 0;

@@ -5,7 +5,7 @@ import com.teamdev.calculator.impl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class EndOfExpressionParser implements MathExpressionParser {
+public class EndOfExpressionParser implements MathExpressionParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EndOfExpressionParser.class);
 
@@ -19,7 +19,7 @@ public final class EndOfExpressionParser implements MathExpressionParser {
             @Override
             public void evaluate(EvaluationStack stack) throws EvaluationException {
 
-                if (stack.isOperationStackHaveBrackets() && !stack.isFunctionsAvailable()) {
+                if (stack.isOperationStackHaveBrackets()/* && !stack.isFunctionsAvailable()*/) {
 
                     final String errorMessage = "Closing bracket is missing for opening bracket, perhaps, at position: "
                             + context.getLastOpeningBracketIndex();

@@ -6,7 +6,7 @@ import com.teamdev.fsm.FiniteStateMachine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class StateMachineCalculator extends FiniteStateMachine<State, EvaluationContext, Double, EvaluationException>
+public class StateMachineCalculator extends FiniteStateMachine<State, EvaluationContext, Double, EvaluationException>
         implements MathExpressionCalculator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StateMachineCalculator.class);

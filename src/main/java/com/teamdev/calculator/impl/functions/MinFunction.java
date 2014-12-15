@@ -1,21 +1,16 @@
 package com.teamdev.calculator.impl.functions;
 
-import com.teamdev.calculator.impl.MultipleArgumentFunction;
+import com.google.common.collect.Sets;
+import com.teamdev.calculator.impl.Function;
 
-import java.util.Collection;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-public final class MinFunction implements MultipleArgumentFunction {
+public class MinFunction implements Function {
 
     @Override
-    public boolean isSingleArgumentFunction() {
-        return false;
-    }
-
-    @Override
-    public double execute(Collection<Double> arguments) {
-        NavigableSet<Double> resultsSet = new TreeSet<Double>(arguments);
+    public Double execute(Double... arguments) {
+        NavigableSet<Double> resultsSet = new TreeSet<Double>(Sets.newHashSet(arguments));
         return resultsSet.first();
     }
 }

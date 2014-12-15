@@ -1,6 +1,6 @@
 package com.teamdev.calculator.impl;
 
-public final class MathExpressionReader {
+public class MathExpressionReader {
     private final String mathExpression;
     private int index = 0;
 

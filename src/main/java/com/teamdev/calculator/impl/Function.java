@@ -1,7 +1,6 @@
 package com.teamdev.calculator.impl;
 
-public interface Function<Argument> {
-    boolean isSingleArgumentFunction();
+public interface Function {
 
-    double execute(Argument argument);
+    Double execute(Double... arguments);
 }

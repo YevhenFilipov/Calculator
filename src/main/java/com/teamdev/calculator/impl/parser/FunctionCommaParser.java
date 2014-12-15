@@ -3,15 +3,15 @@ package com.teamdev.calculator.impl.parser;
 import com.teamdev.calculator.EvaluationException;
 import com.teamdev.calculator.impl.*;
 
-public final class FunctionCommaParser implements MathExpressionParser {
+public class FunctionCommaParser implements MathExpressionParser {
     @Override
     public EvaluationCommand parse(EvaluationContext context) {
 
         final MathExpressionReader mathExpressionReader = context.getMathExpressionReader();
 
-        if (mathExpressionReader.isEndOfMathExpression() ||
-                !context.getEvaluationStack().isFunctionCommasParsingAvailable())
+        if (mathExpressionReader.isEndOfMathExpression()) {
             return null;
+        }
 
         final String commaSymbolPresentation = MathExpressionSymbols.FUNCTION_COMMA.getSymbolPresentation();
         final String semicolonSymbolPresentation = MathExpressionSymbols.FUNCTION_SEMICOLON.getSymbolPresentation();
@@ -24,7 +24,7 @@ public final class FunctionCommaParser implements MathExpressionParser {
                 @Override
                 public void evaluate(EvaluationStack stack) throws EvaluationException {
 
-                    stack.putFunctionComma();
+                    stack.pushFunctionComma();
                 }
             };
         }

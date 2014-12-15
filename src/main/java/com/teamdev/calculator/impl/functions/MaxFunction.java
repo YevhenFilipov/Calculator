@@ -1,21 +1,16 @@
 package com.teamdev.calculator.impl.functions;
 
-import com.teamdev.calculator.impl.MultipleArgumentFunction;
+import com.google.common.collect.Sets;
+import com.teamdev.calculator.impl.Function;
 
-import java.util.Collection;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-public final class MaxFunction implements MultipleArgumentFunction {
+public class MaxFunction implements Function {
 
     @Override
-    public double execute(Collection<Double> arguments) {
-        NavigableSet<Double> resultsSet = new TreeSet<Double>(arguments);
+    public Double execute(Double... arguments) {
+        NavigableSet<Double> resultsSet = new TreeSet<Double>(Sets.newHashSet(arguments));
         return resultsSet.last();
-    }
-
-    @Override
-    public boolean isSingleArgumentFunction() {
-        return false;
     }
 }

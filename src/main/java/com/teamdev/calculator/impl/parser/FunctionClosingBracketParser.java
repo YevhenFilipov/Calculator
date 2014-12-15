@@ -5,7 +5,7 @@ import com.teamdev.calculator.impl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class FunctionClosingBracketParser implements MathExpressionParser {
+public class FunctionClosingBracketParser implements MathExpressionParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FunctionClosingBracketParser.class);
 
@@ -34,7 +34,7 @@ public final class FunctionClosingBracketParser implements MathExpressionParser 
                             LOGGER.error(ErrorMessage);
                         throw new EvaluationException(ErrorMessage, mathExpressionReader.getIndex());
                     }
-                    stack.executeFunction();
+                    stack.executeTopFunction();
                 }
             };
         }
