@@ -11,11 +11,11 @@ import java.util.Deque;
 public class EvaluationStack {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationStack.class);
-    private final Deque<Deque<Double>> operandStack = new ArrayDeque<Deque<Double>>();
-    private final Deque<Deque<BinaryOperation>> operationStack = new ArrayDeque<Deque<BinaryOperation>>();
-    private final Deque<Function> functionStack = new ArrayDeque<Function>();
-    private final Deque<Integer> sizeOfOperationStack = new ArrayDeque<Integer>();
-    private final Deque<Integer> bracketNumberOfTopFunction = new ArrayDeque<Integer>();
+    private final Deque<Deque<Double>> operandStack = new ArrayDeque<>();
+    private final Deque<Deque<BinaryOperation>> operationStack = new ArrayDeque<>();
+    private final Deque<Function> functionStack = new ArrayDeque<>();
+    private final Deque<Integer> sizeOfOperationStack = new ArrayDeque<>();
+    private final Deque<Integer> bracketNumberOfTopFunction = new ArrayDeque<>();
     private int bracketsCount;
 
     public EvaluationStack() {

@@ -94,7 +94,7 @@ public final class CalculatorView {
         mainFrame.setContentPane(calculatorContent);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-       mainFrame.pack();
+        mainFrame.pack();
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
