@@ -36,6 +36,14 @@ public class ClosingBracketParser implements MathExpressionParser {
                     }
 
                     stack.pushClosingBracket();
+                    if (stack.isError()) {
+                        final String message = "Incorrect expression in brackets at position " +
+                                mathExpressionReader.getIndex();
+                        if (LOGGER.isErrorEnabled())
+                            LOGGER.error(message);
+                        throw new EvaluationException(message,
+                                mathExpressionReader.getIndex());
+                    }
                 }
             };
         }

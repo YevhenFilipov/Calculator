@@ -17,6 +17,7 @@ public class EvaluationStack {
     private final Deque<Integer> sizeOfOperationStack = new ArrayDeque<>();
     private final Deque<Integer> bracketNumberOfTopFunction = new ArrayDeque<>();
     private int bracketsCount;
+    private boolean errorFlag = false;
 
     public EvaluationStack() {
         operandStack.push(new ArrayDeque<Double>());
@@ -35,8 +36,12 @@ public class EvaluationStack {
         operandStack.peek().push(number);
     }
 
-    public Double popNumber() {
+    public Double popResult() {
         return operandStack.pop().pop();
+    }
+
+    public boolean isError() {
+        return errorFlag;
     }
 
     public void executeTopOperator() {
@@ -84,7 +89,11 @@ public class EvaluationStack {
         }
 
         operationStack.pop();
-        operandStack.peek().push(result);
+        if (result == null) {
+            errorFlag = true;
+        } else {
+            operandStack.peek().push(result);
+        }
         bracketsCount--;
     }
 
@@ -92,13 +101,13 @@ public class EvaluationStack {
         return operationStack.size() > 1;
     }
 
-    public Double executeTopFunction() {
+    private Double executeTopFunction() {
         evaluateFunctionArgument();
         final Function currentFunction = functionStack.pop();
         final Deque<Double> operands = operandStack.pop();
         final Double[] arguments = operands.toArray(new Double[operands.size()]);
 
-        final double result = currentFunction.execute(arguments);
+        final Double result = currentFunction.execute(arguments);
         bracketNumberOfTopFunction.pop();
         if (LOGGER.isInfoEnabled())
             LOGGER.info("Current executing function is: " + currentFunction.getClass().getSimpleName());

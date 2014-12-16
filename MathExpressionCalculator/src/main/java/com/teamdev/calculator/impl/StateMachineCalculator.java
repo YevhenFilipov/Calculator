@@ -28,7 +28,7 @@ public class StateMachineCalculator extends FiniteStateMachine<State, Evaluation
 
     @Override
     protected Double finish(EvaluationContext context) {
-        final Double result = context.getEvaluationStack().popNumber();
+        final Double result = context.getEvaluationStack().popResult();
         if (LOGGER.isInfoEnabled())
             LOGGER.info("Calculations finished, the result is: " + result.toString());
         return result;
