@@ -1,6 +1,6 @@
-import com.teamdev.calculator.EvaluationException;
-import com.teamdev.calculator.MathExpressionCalculator;
-import com.teamdev.calculator.impl.StateMachineCalculator;
+import com.filipov.calculator.EvaluationException;
+import com.filipov.calculator.MathExpressionCalculator;
+import com.filipov.calculator.impl.StateMachineCalculator;
 import junit.framework.Assert;
 import org.junit.Test;
 
